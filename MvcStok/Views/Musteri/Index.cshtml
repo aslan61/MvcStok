@@ -1,0 +1,40 @@
+﻿@using MvcStok.Models.Entity
+@model List<MUSTERILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<table id="tbl2" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>MÜŞTERİ ID</th>
+            <th>MÜŞTERİ ADI</th>
+            <th>MÜŞTERİ SOYADI</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+            <th>Alert</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mstr in Model)
+        {
+            <tr>
+                <th>@mstr.MUSTERIID</th>
+                <td>@mstr.MUSTERIAD</td>
+                <td>@mstr.MUSTERISOYAD</td>
+                <td><a href="/Musteri/Sil/@mstr.MUSTERIID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/Musteri/MusteriGetir/@mstr.MUSTERIID" class="btn btn-success">GÜNCELLE</a></td>
+                <td>@Html.ActionLink("SIL BUTONU", "Sil", new { id = mstr.MUSTERIID }, new { @class = "btn btn-warning", onclick = "return confirm('Gerçekten Silmek istiyor Musunuz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Musteri/YeniMusteri/" class="btn btn-primary">Yeni Müşteri Ekle</a>
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script>
+    $('#tbl2').DataTable();
+</script>
